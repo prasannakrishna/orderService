@@ -33,4 +33,10 @@ public class OrderProjection {
         order.setNumberOfLines(order.getNumberOfLines() + 1);
         orderRepository.save(order);
     }
+
+    @EventHandler
+    public void on(OrderToStockRequestEvent event) {
+        System.out.println("Processing order to stock for Order: " + event.orderId);
+        // Fetch active orders and allocate inventory
+    }
 }

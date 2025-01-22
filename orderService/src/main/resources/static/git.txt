@@ -11,3 +11,6 @@ git push -u origin master
 git remote add origin https://github.com/prasannakrishna/paymentService.git
 git branch -M master
 git push -u origin master
+
+
+mvn archetype:generate -DgroupId=com.bhagwat.scm -DartifactId=shared-module -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
