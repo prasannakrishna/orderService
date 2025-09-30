@@ -1,0 +1,139 @@
+This service processes mainly 7 types of orders -
+CommunityOrder - from community to store or warehouse or seller
+customerOrder - from customer to store or warehouse or seller
+OrderToStore from store to seller
+OrderToStock from warehouse to seller
+replenishmentOrder - from store to warehouse
+return Order - from warehouse to store
+recall order - from seller to warehouse or store
+
+community order looks like this
+
+{
+  "communityId": "123",
+  "productDemand": [
+    {
+      "productId": "P001",
+      "variantId": "V001",
+      "totalQuantity": 500
+    },
+    {
+      "productId": "P002",
+      "variantId": "V003",
+      "totalQuantity": 320
+    }
+  ],
+  "communityClusters": [
+    {
+      "communityClusterId": "CC101",
+      "clusterId": "C001",
+      "productId": "P001",
+      "variantId": "V001",
+      "totalClusterQuantity": 200,
+      "customers": [
+        {
+          "customerId": "CU001",
+          "productId": "P001",
+          "variantId": "V001",
+          "orderQuantity": 50
+        },
+        {
+          "customerId": "CU002",
+          "productId": "P001",
+          "variantId": "V001",
+          "orderQuantity": 150
+        }
+      ]
+    },
+    {
+      "communityClusterId": "CC102",
+      "clusterId": "C002",
+      "productId": "P002",
+      "variantId": "V003",
+      "totalClusterQuantity": 120,
+      "customers": [
+        {
+          "customerId": "CU010",
+          "productId": "P002",
+          "variantId": "V003",
+          "orderQuantity": 40
+        },
+        {
+          "customerId": "CU011",
+          "productId": "P002",
+          "variantId": "V003",
+          "orderQuantity": 80
+        }
+      ]
+    }
+  ]
+}
+
+
+
+following is communityorderheader payload to create
+
+{
+  "communityId": "C-BUS-PARK-Z",
+  "communityType": "PUBLIC",
+  "category": "Office Supplies",
+  "orderStatus": "RELEASED",
+  "subscriptionCartType": "MONTH",
+  "orderType": "CommunityOrder",
+  "cartCheckoutDate": "2025-09-29",
+  "shipByDate": "2025-09-30",
+  "deliveryDate": "2025-10-01",
+  "orderValue": 450.00,
+  "orderCurrency": "USD",
+  "city": "Austin",
+  "productLines": [
+    {
+      "sellerId": "S-TECH-PRINTER",
+      "productId": "PROD-CART-300",
+      "variantId": "VAR-BLACK-TWIN",
+      "orderQuantity": 10,
+      "customerLines": [
+        {
+          "customerId": "CUST-MGR-FIN",
+          "productId": "PROD-CART-300",
+          "variantId": "VAR-BLACK-TWIN",
+          "orderQuantity": 6,
+          "addressId": "ADDR-1",
+          "clusterId": "CL-FL-3-WEST"
+        },
+        {
+          "customerId": "CUST-MGR-HR",
+          "productId": "PROD-CART-300",
+          "variantId": "VAR-BLACK-TWIN",
+          "orderQuantity": 4,
+          "addressId": "ADDR-2",
+          "clusterId": "CL-FL-5-EAST"
+        }
+      ]
+    },
+    {
+      "sellerId": "S-PAPER-DISTRO",
+      "productId": "PROD-PAPER-A4",
+      "variantId": "VAR-BOX-RECYCLED",
+      "orderQuantity": 15,
+      "customerLines": [
+        {
+          "customerId": "CUST-MGR-FIN",
+          "productId": "PROD-PAPER-A4",
+          "variantId": "VAR-BOX-RECYCLED",
+          "orderQuantity": 5,
+          "addressId": "ADDR-3",
+          "clusterId": "CL-FL-3-WEST"
+        },
+        {
+          "customerId": "CUST-MGR-HR",
+          "productId": "PROD-PAPER-A4",
+          "variantId": "VAR-BOX-RECYCLED",
+          "orderQuantity": 10,
+          "addressId": "ADDR-4",
+          "clusterId": "CL-FL-5-EAST"
+        }
+      ]
+    }
+  ]
+}
