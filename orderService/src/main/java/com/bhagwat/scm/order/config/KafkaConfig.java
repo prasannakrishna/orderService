@@ -79,6 +79,12 @@ public class KafkaConfig {
         // IMPORTANT: Trusts all packages for deserialization based on the __TypeId__ header.
         config.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
 
+        // Map cartService's fully-qualified class names to our local event classes,
+        // so cross-service deserialization works even though packages differ.
+        config.put(JsonDeserializer.TYPE_MAPPINGS,
+                "com.bhagwat.retail.cart.dto.CustomerOrderCreatedEvent:com.bhagwat.scm.order.event.CustomerOrderCreatedEvent," +
+                "com.bhagwat.retail.cart.dto.CommunityOrderCreatedEvent:com.bhagwat.scm.order.event.CommunityOrderCreatedEvent");
+
         // Use the custom JsonDeserializer initialized with our ObjectMapper and 'Object' as the default type.
         JsonDeserializer<Object> jsonDeserializer = new JsonDeserializer<>(Object.class, objectMapper);
 

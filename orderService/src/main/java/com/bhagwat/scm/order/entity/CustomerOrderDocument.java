@@ -1,32 +1,36 @@
-package com.bhagwat.scm.orderService.query.entity;
+package com.bhagwat.scm.order.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.UUID;
 
 @Data
+@Document(collection = "customer_orders")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "customer_orders")
 public class CustomerOrderDocument {
     @Id
-    private String id;
     private String orderId;
     private String customerId;
     private String productId;
     private String variantId;
-    private Integer quantity;
+    private String sellerId;
+    private String communityId;
+    private String inventoryKey;
+    private int quantity;
     private BigDecimal pricePerUnit;
     private BigDecimal totalAmount;
+    private BigDecimal shippingCost;
+    private BigDecimal taxAmount;
     private String currency;
     private String orderStatus;
-    private String paymentStatus;
-    private String trackingId;
-    private Instant createdAt;
-    private Instant updatedAt;
+    private Instant eventCreatedAt;
+    private Instant savedAt;
 }
